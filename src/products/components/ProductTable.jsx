@@ -13,7 +13,7 @@ import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import { Avatar, Grid, IconButton, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { changeStatusProduct } from "../store/products/thunks";
+import { changeStatusProduct } from "../../store/products/thunks";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 
 const columns = [
@@ -47,20 +47,6 @@ export default function ProductTable() {
 
   return (
     <>
-      <Grid container>
-        <Grid item xs={6}>
-          <h2>Products</h2>
-        </Grid>
-        <Grid item xs={6} textAlign="right" alignSelf="center">
-          <Tooltip title="Create a product">
-            <Link to="/products/create">
-              <IconButton color="primary" aria-label="Create a product">
-                <AddCircleOutlineRoundedIcon />
-              </IconButton>
-            </Link>
-          </Tooltip>
-        </Grid>
-      </Grid>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">

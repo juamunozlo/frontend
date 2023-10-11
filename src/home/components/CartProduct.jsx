@@ -9,11 +9,16 @@ import {
   addProduct,
   deleteAllProducts,
   deleteOneProduct,
-} from "../store/cart/thunks";
+} from "../../store/cart/thunks";
 import { useDispatch } from "react-redux";
 
-export default function CartProduct({ formatterPeso, product }) {
+export default function CartProduct({ product }) {
   const dispatch = useDispatch();
+  const formatterPeso = new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
+    minimumFractionDigits: 0,
+  });
   return (
     <Card>
       <CardMedia

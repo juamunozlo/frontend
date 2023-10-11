@@ -14,19 +14,20 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 //import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Badge } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { signOut } from "../store/auth/thunks";
+import { signOut } from "../../store/auth/thunks";
 
 const pages = [
   { name: "Users", path: "/users" },
-  { name: "Products", path: "/" },
+  { name: "Products", path: "/products" },
 ];
 
 const CustomAppBar = ({ handleOpenLogin, handleOpenSignUp }) => {
   //const { auth, cart } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
   const cart = useSelector((state) => state.cart);
 
@@ -46,6 +47,11 @@ const CustomAppBar = ({ handleOpenLogin, handleOpenSignUp }) => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const logout = () => {
+    dispatch(signOut());
+    navigate("/");
   };
 
   return (
@@ -177,7 +183,7 @@ const CustomAppBar = ({ handleOpenLogin, handleOpenSignUp }) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <MenuItem onClick={() => dispatch(signOut())}>
+                <MenuItem onClick={logout}>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
               </Menu>
