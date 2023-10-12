@@ -5,11 +5,16 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { addProduct } from "../store/cart/thunks";
+import { addProduct } from "../../store/cart/thunks";
 import { useDispatch } from "react-redux";
 
-export default function Product({ formatterPeso, product }) {
+export default function Product({ product }) {
   const dispatch = useDispatch();
+  const formatterPeso = new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
+    minimumFractionDigits: 0,
+  });
   return (
     <Card sx={{ maxWidth: 345, minHeight: 300 }}>
       <CardMedia

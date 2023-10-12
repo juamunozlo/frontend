@@ -6,8 +6,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 
-export default function Resumen({ formatterPeso }) {
+export default function Resumen() {
   const cart = useSelector((state) => state.cart);
+  const formatterPeso = new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
+    minimumFractionDigits: 0,
+  });
   return (
     <Card>
       <CardContent>
