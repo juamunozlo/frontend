@@ -1,11 +1,10 @@
 Proyecto: Crustáceo Cascarudo
+
 Equipo: 11
 
-Nelson David Aristizabal Amaya
-Crustaceo Cascarudo
-Juliana Andrea Bedoya Salazar
-Juan Camilo Muñoz López
-Pablo Restrepo Osorio
+- Nelson David Aristizabal Amaya
+- Juan Camilo Muñoz López
+- Pablo Restrepo Osorio
 
 # React + Vite
 
