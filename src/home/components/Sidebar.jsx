@@ -35,6 +35,8 @@ import Button from "@mui/material/Button";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import LoginModal from '../../auth/LoginModal';
 import SignUpModal from "../../auth/SignUpModal";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 
 const drawerWidth = 240;
 
@@ -74,7 +76,8 @@ const AppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-  backgroundColor: 'gray',
+  backgroundColor: 'transparent', // Agregamos el color de
+  boxShadow: 'none',
 }));
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -152,18 +155,27 @@ export default function PersistentDrawerLeft({ children }) {
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="black"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
-            <MenuIcon />
+            <MenuIcon fontSize="large" color='black' />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Persistent drawer
-          </Typography>
-          {auth && auth.role == 1 && (
+          <Link to="/" underline="none" style={{ textDecoration: 'none' }}>
+            <Typography variant="h4" noWrap component="div" className='title'>
+              The krusty krab
+            </Typography>
+          </Link>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh', marginLeft: '25px' }}>
+            <Link to="/products" style={{ textDecoration: 'none' }}>
+              <Button variant="contained" className='YellowButton'>
+                Menu
+              </Button>
+            </Link>
+          </Box>
+{/*           {auth && auth.role == 1 && (
             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
               <Link to="/users">
                 <MenuItem onClick={handleCloseNavMenu}>
@@ -176,59 +188,80 @@ export default function PersistentDrawerLeft({ children }) {
                 </MenuItem>
               </Link>
             </Box >
-          )}
-          {!(auth && auth.role == 1) && (
-            <Tooltip title="Open cart">
-              <Link to="/cart">
-                <Badge badgeContent={cart.length} color="error">
-                  <IconButton style={{ color: "#fff" }}>
-                    <ShoppingCartRoundedIcon />
-                  </IconButton>
-                </Badge>
-              </Link>
-            </Tooltip>
-          )}
-          {auth ? (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton
-                  style={{ color: "#fff" }}
-                  onClick={handleOpenUserMenu}
+          )} */}
+          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
+            {!(auth && auth.role == 1) && (
+              <Box>
+                <Tooltip title="Open Maps">
+                  <Link to="/maps">
+                    <Badge color="error">
+                      <IconButton style={{ color: "black" }}>
+                        <PlaceIcon />
+                      </IconButton>
+                    </Badge>
+                  </Link>
+                </Tooltip>
+                <Tooltip title="Open cart">
+                  <Link to="/cart">
+                    <Badge badgeContent={cart.length} color="warning">
+                      <IconButton style={{ color: "black" }}>
+                        <ShoppingCartRoundedIcon />
+                      </IconButton>
+                    </Badge>
+                  </Link>
+                </Tooltip>
+                <Tooltip title="Notifications">
+                  <Link to="/notifications">
+                    <Badge color="error">
+                      <IconButton style={{ color: "black" }}>
+                        <NotificationsActiveIcon />
+                      </IconButton>
+                    </Badge>
+                  </Link>
+                </Tooltip>
+              </Box>
+            )}
+            {auth ? (
+              <Box sx={{ flexGrow: 0 }}>
+                <div style={{ display: "flex" }}>
+                <Stack direction="row" spacing={2}>
+                  <Button color="inherit" onClick={handleOpenUserMenu} sx={{ color: 'black' }}>
+                    <Avatar alt="Remy Sharp" src="https://www.spongebobshop.com/cdn/shop/products/Viacom_Spongebob_SubTotePRTGENSOG16_00013_RO_grande.jpg?v=1581618420" />
+                  </Button>
+                </Stack>
+              </div>
+
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
                 >
-                  <PersonRoundedIcon />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                <MenuItem onClick={logout}>
-                  <Typography textAlign="center">Logout</Typography>
-                </MenuItem>
-              </Menu>
-            </Box>
-          ) : (
-            <div style={{ display: "flex" }}>
-              <Button color="inherit" onClick={handleOpenLogin}>
-                Login
-              </Button>
-              <Button color="inherit" onClick={handleOpenSignUp}>
-                Sign up
-              </Button>
-            </div>
-          )}
+                  <MenuItem onClick={logout}>
+                    <Typography textAlign="center" sx={{ color: 'black' }}>Logout</Typography>
+                  </MenuItem>
+                </Menu>
+              </Box>
+            ) : (
+              <div style={{ display: "flex" }}>
+                <Stack direction="row" spacing={2}>
+                  <Button color="inherit" onClick={handleOpenLogin} sx={{ color: 'black' }}>
+                    <Avatar alt="Remy Sharp" src="https://www.spongebobshop.com/cdn/shop/products/Viacom_Spongebob_SubTotePRTGENSOG16_00013_RO_grande.jpg?v=1581618420" />
+                  </Button>
+                </Stack>
+              </div>
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -255,63 +288,76 @@ export default function PersistentDrawerLeft({ children }) {
         </Box>
         <Divider />
         <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <CottageIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Home'} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MenuBookIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Menu'} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <NotificationsActiveIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Notificaciones'} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <SettingsIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Configuración'} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Salir'} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HistoryIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Historial'} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <PlaceIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Lugar'} />
-            </ListItemButton>
-          </ListItem>
-
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <CottageIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Home'} sx={{ color: 'white' }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link to="/menu" style={{ textDecoration: 'none' }}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <MenuBookIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Menu'} sx={{ color: 'white' }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link to="/notifications" style={{ textDecoration: 'none' }}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <NotificationsActiveIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Notificaciones'} sx={{ color: 'white' }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link to="/settings" style={{ textDecoration: 'none' }}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <SettingsIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Configuración'} sx={{ color: 'white' }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link to="/logout" style={{ textDecoration: 'none' }}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Salir'} sx={{ color: 'white' }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link to="/history" style={{ textDecoration: 'none' }}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <HistoryIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Historial'} sx={{ color: 'white' }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link to="/place" style={{ textDecoration: 'none' }}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <PlaceIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Lugar'} sx={{ color: 'white' }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         </List>
         <Divider />
       </Drawer>
