@@ -70,10 +70,6 @@ export default function HomeRoutes() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <CustomAppBar
-          handleOpenLogin={handleOpenLogin}
-          handleOpenSignUp={handleOpenSignUp}
-        />
         <main>
           <Container>
             {/* End hero unit */}
