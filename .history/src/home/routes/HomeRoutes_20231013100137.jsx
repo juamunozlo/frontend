@@ -17,8 +17,6 @@ import CustomAppBar from "../components/CustomAppBar";
 import LoginModal from "../../auth/LoginModal";
 import SignUpModal from "../../auth/SignUpModal";
 import Products from "../components/Products";
-import Location from "../components/Location";
-import LocationImage from "../components/LocationImage";
 //import Icommerce from "../components/Icommerce";
 
 function Copyright() {

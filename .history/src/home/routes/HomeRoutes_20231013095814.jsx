@@ -17,8 +17,6 @@ import CustomAppBar from "../components/CustomAppBar";
 import LoginModal from "../../auth/LoginModal";
 import SignUpModal from "../../auth/SignUpModal";
 import Products from "../components/Products";
-import Location from "../components/Location";
-import LocationImage from "../components/LocationImage";
 //import Icommerce from "../components/Icommerce";
 
 function Copyright() {
@@ -88,18 +86,6 @@ export default function HomeRoutes() {
                 />
                 <Route path="/products/*" element={<ProductRoutes />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route
-                  path="/place"
-                  element= {
-                  <Grid container>
-                    <Grid item xs={24} sm={12} md={6}>
-                      <Location/>
-                    </Grid>
-                    <Grid item xs={24} sm={12} md={6}>
-                      <LocationImage/>
-                    </Grid>
-                  </Grid>}
-                />
               </Routes>
             </Grid>
           </Container>
