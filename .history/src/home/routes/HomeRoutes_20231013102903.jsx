@@ -102,7 +102,7 @@ export default function HomeRoutes() {
                     </Grid>
                   </Grid>}
                 />
-                <Route
+                <Route /*
                   path="/notifications"
                   element= {
                   <Grid container>
@@ -112,7 +112,7 @@ export default function HomeRoutes() {
                     <Grid item xs={24} sm={12} md={6}>
                       <NotificationsImage/>
                     </Grid>
-                  </Grid>}
+                  </Grid>}*/
                 />
               </Routes>
             </Grid>

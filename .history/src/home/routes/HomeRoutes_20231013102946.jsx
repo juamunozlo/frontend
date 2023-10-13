@@ -19,7 +19,7 @@ import SignUpModal from "../../auth/SignUpModal";
 import Products from "../components/Products";
 import Location from "../components/Location";
 import LocationImage from "../components/LocationImage";
-import Notifications from "../components/Notifications";
+//import Notifications from "../components/Notifications";
 import NotificationsImage from "../components/NotificationsImage";
 //import Icommerce from "../components/Icommerce";
 
@@ -102,7 +102,7 @@ export default function HomeRoutes() {
                     </Grid>
                   </Grid>}
                 />
-                <Route
+                <Route /*
                   path="/notifications"
                   element= {
                   <Grid container>
@@ -112,7 +112,7 @@ export default function HomeRoutes() {
                     <Grid item xs={24} sm={12} md={6}>
                       <NotificationsImage/>
                     </Grid>
-                  </Grid>}
+                  </Grid>}*/
                 />
               </Routes>
             </Grid>

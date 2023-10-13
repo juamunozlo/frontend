@@ -103,7 +103,7 @@ export default function HomeRoutes() {
                   </Grid>}
                 />
                 <Route
-                  path="/notifications"
+                  path="/place"
                   element= {
                   <Grid container>
                     <Grid item xs={24} sm={12} md={6}>

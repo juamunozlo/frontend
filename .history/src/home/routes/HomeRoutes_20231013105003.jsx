@@ -107,7 +107,7 @@ export default function HomeRoutes() {
                   element= {
                   <Grid container>
                     <Grid item xs={24} sm={12} md={6}>
-                      <Notifications/>
+                      <Location/>
                     </Grid>
                     <Grid item xs={24} sm={12} md={6}>
                       <NotificationsImage/>
