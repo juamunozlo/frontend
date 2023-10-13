@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import { addProduct } from "../../store/cart/thunks";
 import { useDispatch } from "react-redux";
 
-export default function Product({ product }) {
+export default function Product({ product, width, height }) {
   const dispatch = useDispatch();
   const formatterPeso = new Intl.NumberFormat("es-CO", {
     style: "currency",
@@ -16,12 +16,20 @@ export default function Product({ product }) {
     minimumFractionDigits: 0,
   });
   return (
-    <Card sx={{ maxWidth: 345, minHeight: 300 }}>
+    <Card
+      sx={{
+        maxWidth: width === 0 ? "none" : width,
+        height: "90%",
+        backgroundColor: "#e4c8b1",
+        borderRadius: "10%",
+      }}
+    >
       <CardMedia
         component="img"
         alt={product.description}
-        height="140"
+        //height="140"
         //sx={{width:"50%"}}
+        style={{ height: "40%" }}
         image={
           product.image ? product.image.url : "https://picsum.photos/200/300"
         }

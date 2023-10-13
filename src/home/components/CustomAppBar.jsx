@@ -71,7 +71,7 @@ const CustomAppBar = ({ handleOpenLogin, handleOpenSignUp }) => {
               textDecoration: "none",
             }}
           >
-            Icommerce
+            Crustáceo Cascarudo
           </Typography>
           {auth && auth.role == 1 && (
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -130,7 +130,7 @@ const CustomAppBar = ({ handleOpenLogin, handleOpenSignUp }) => {
               textDecoration: "none",
             }}
           >
-            Icommerce
+            Crustáceo Cascarudo
           </Typography>
           {auth && auth.role == 1 && (
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>

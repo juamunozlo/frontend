@@ -20,7 +20,7 @@ export default function CartProduct({ product }) {
     minimumFractionDigits: 0,
   });
   return (
-    <Card>
+    <Card sx={{ backgroundColor: "#e4c8b1", borderRadius: "10%" }}>
       <CardMedia
         component="img"
         alt="green iguana"

@@ -73,7 +73,12 @@ export default function HomeRoutes() {
         <main>
           <Container>
             {/* End hero unit */}
-            <Grid sx={{ mt: 0 }} container spacing={4}>
+            <Grid
+              sx={{ mt: 0 }}
+              container
+              spacing={2}
+              style={{ height: "50%" }}
+            >
               <Routes>
                 <Route
                   path="/"
