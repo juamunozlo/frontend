@@ -6,7 +6,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { colors } from "@mui/material";
-import { createTheme } from '@mui/material/styles';
 
 export default function Resumen() {
   const cart = useSelector((state) => state.cart);

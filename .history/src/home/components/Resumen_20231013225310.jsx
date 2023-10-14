@@ -7,6 +7,15 @@ import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { colors } from "@mui/material";
 import { createTheme } from '@mui/material/styles';
+import { light } from "@mui/material/styles/createPalette";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#006400"
+    }
+  }
+})
 
 export default function Resumen() {
   const cart = useSelector((state) => state.cart);
@@ -41,7 +50,9 @@ export default function Resumen() {
       </CardContent>
       <CardActions sx = {{justifyContent:"center"}}>
         <div style={{backgroundColor:"#ED716D", width: "400px", height: "40px"}}>
-        <Button fullWidth = "400px" justify = "center">Confirmar pedido</Button>
+        <ThemeProvider theme={theme}>
+        <Button color = "primary" fullWidth = "400px" justify = "center">Confirmar pedido</Button>
+        </ThemeProvider>
         </div>
       </CardActions>
     </Card>

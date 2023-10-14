@@ -8,6 +8,18 @@ import { useSelector } from "react-redux";
 import { colors } from "@mui/material";
 import { createTheme } from '@mui/material/styles';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#006400"
+    },
+    secondary: {
+      main: "#ffa500"
+    }
+  }
+});
+
+
 export default function Resumen() {
   const cart = useSelector((state) => state.cart);
   const formatterPeso = new Intl.NumberFormat("es-CO", {
@@ -41,7 +53,9 @@ export default function Resumen() {
       </CardContent>
       <CardActions sx = {{justifyContent:"center"}}>
         <div style={{backgroundColor:"#ED716D", width: "400px", height: "40px"}}>
-        <Button fullWidth = "400px" justify = "center">Confirmar pedido</Button>
+        <ThemeProvider theme={theme}>
+        <Button color = "primary" fullWidth = "400px" justify = "center">Confirmar pedido</Button>
+        </ThemeProvider>
         </div>
       </CardActions>
     </Card>

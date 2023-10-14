@@ -41,7 +41,7 @@ export default function Resumen() {
       </CardContent>
       <CardActions sx = {{justifyContent:"center"}}>
         <div style={{backgroundColor:"#ED716D", width: "400px", height: "40px"}}>
-        <Button fullWidth = "400px" justify = "center">Confirmar pedido</Button>
+        <Button color="white" fullWidth = "400px" justify = "center">Confirmar pedido</Button>
         </div>
       </CardActions>
     </Card>
