@@ -22,6 +22,8 @@ import LocationImage from "../components/LocationImage";
 import Notifications from "../components/Notifications";
 import NotificationsImage from "../components/NotificationsImage";
 import Details from "../components/Details";
+import UserRoutes from "../../users/routes/UserRoutes";
+import OrderRoutes from "../../orders/routes/OrderRoutes";
 
 //import Icommerce from "../components/Icommerce";
 
@@ -91,6 +93,8 @@ export default function HomeRoutes() {
                   element={(!auth || auth.role === 3) && <Products />}
                 />
                 <Route path="/products/*" element={<ProductRoutes />} />
+                <Route path="/users/*" element={<UserRoutes />} />
+                <Route path="/orders/*" element={<OrderRoutes />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route
                   path="/place"
@@ -102,7 +106,8 @@ export default function HomeRoutes() {
                       <Grid item xs={24} sm={12} md={6}>
                         <LocationImage />
                       </Grid>
-                    </Grid>}
+                    </Grid>
+                  }
                 />
                 <Route
                   path="/notifications"
@@ -114,7 +119,8 @@ export default function HomeRoutes() {
                       <Grid item xs={24} sm={12} md={6}>
                         <NotificationsImage />
                       </Grid>
-                    </Grid>}
+                    </Grid>
+                  }
                 />
                 <Route
                   path="/details"

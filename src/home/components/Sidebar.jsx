@@ -1,29 +1,30 @@
-import React, { useState } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import CottageIcon from '@mui/icons-material/Cottage'; // Icono de casa
-import MenuBookIcon from '@mui/icons-material/MenuBook'; // Icono de menu
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive'; // Icono de notificaciones
-import SettingsIcon from '@mui/icons-material/Settings'; // Icono de configuraciones
-import LogoutIcon from '@mui/icons-material/Logout'; // Icono de logout
-import HistoryIcon from '@mui/icons-material/History'; // Icono de historial
-import PlaceIcon from '@mui/icons-material/Place'; // Icono de lugar
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded"; // Icono de carrito 
+import React, { useState } from "react";
+import { styled, useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import CssBaseline from "@mui/material/CssBaseline";
+import MuiAppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import CottageIcon from "@mui/icons-material/Cottage"; // Icono de casa
+import MenuBookIcon from "@mui/icons-material/MenuBook"; // Icono de menu
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive"; // Icono de notificaciones
+import SettingsIcon from "@mui/icons-material/Settings"; // Icono de configuraciones
+import LogoutIcon from "@mui/icons-material/Logout"; // Icono de logout
+import HistoryIcon from "@mui/icons-material/History"; // Icono de historial
+import PlaceIcon from "@mui/icons-material/Place"; // Icono de lugar
+import GroupIcon from "@mui/icons-material/Group";
+import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded"; // Icono de carrito
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../store/auth/thunks";
 import { Link, useNavigate } from "react-router-dom";
@@ -33,67 +34,64 @@ import Tooltip from "@mui/material/Tooltip";
 import { Badge } from "@mui/material";
 import Button from "@mui/material/Button";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import LoginModal from '../../auth/LoginModal';
+import LoginModal from "../../auth/LoginModal";
 import SignUpModal from "../../auth/SignUpModal";
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import { useMediaQuery } from '@mui/material';
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import { useMediaQuery } from "@mui/material";
 
 const drawerWidth = 240;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
 
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: `-${drawerWidth}px`,
     ...(open && {
-      transition: theme.transitions.create('margin', {
+      transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
       marginLeft: 0,
     }),
-  }),
+  })
 );
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
+  transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
-
   }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-  backgroundColor: 'transparent', // Agregamos el color de
-  boxShadow: 'none',
+  backgroundColor: "transparent", // Agregamos el color de
+  boxShadow: "none",
 }));
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
+  justifyContent: "flex-end",
 }));
 
-
 export default function PersistentDrawerLeft({ children }) {
-
-  const isSmallScreen = useMediaQuery('(max-width:600px)');
+  const isSmallScreen = useMediaQuery("(max-width:600px)");
   const [openLogin, setOpenLogin] = useState(false);
   const handleOpenLogin = () => {
     setOpenLogin(true);
@@ -107,7 +105,6 @@ export default function PersistentDrawerLeft({ children }) {
     setOpenLogin(false);
   };
   const handleCloseSignUp = () => setOpenSignUp(false);
-
 
   /*  */
   const dispatch = useDispatch();
@@ -139,7 +136,6 @@ export default function PersistentDrawerLeft({ children }) {
   };
   /*  */
 
-
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -152,7 +148,7 @@ export default function PersistentDrawerLeft({ children }) {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -161,18 +157,37 @@ export default function PersistentDrawerLeft({ children }) {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            sx={{ mr: 2, ...(open && { display: "none" }) }}
           >
-            <MenuIcon fontSize="large" color='black' />
+            <MenuIcon fontSize="large" color="black" />
           </IconButton>
-          <Link to="/" underline="none" style={{ textDecoration: 'none' }} aria-label="Ir a la página de inicio">
-            <Typography variant="h4" noWrap component="div" className='title' role="heading">
-              {isSmallScreen ? 'The kk' : 'The krusty krab'}
+          <Link
+            to="/"
+            underline="none"
+            style={{ textDecoration: "none" }}
+            aria-label="Ir a la página de inicio"
+          >
+            <Typography
+              variant="h4"
+              noWrap
+              component="div"
+              className="title"
+              role="heading"
+            >
+              {isSmallScreen ? "The kk" : "The krusty krab"}
             </Typography>
           </Link>
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh', marginLeft: '25px' }}>
-            <Link to="/products" style={{ textDecoration: 'none' }}>
-              <Button variant="contained" className='YellowButton'>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "10vh",
+              marginLeft: "25px",
+            }}
+          >
+            <Link to="/products" style={{ textDecoration: "none" }}>
+              <Button variant="contained" className="YellowButton">
                 Menu
               </Button>
             </Link>
@@ -191,7 +206,9 @@ export default function PersistentDrawerLeft({ children }) {
               </Link>
             </Box >
           )} */}
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
+          <Box
+            sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
+          >
             {!(auth && auth.role == 1) && (
               <Box>
                 <Tooltip title="Open Maps">
@@ -227,8 +244,15 @@ export default function PersistentDrawerLeft({ children }) {
               <Box sx={{ flexGrow: 0 }}>
                 <div style={{ display: "flex" }}>
                   <Stack direction="row" spacing={2}>
-                    <Button color="inherit" onClick={handleOpenUserMenu} sx={{ color: 'black' }}>
-                      <Avatar alt="Remy Sharp" src="https://www.spongebobshop.com/cdn/shop/products/Viacom_Spongebob_SubTotePRTGENSOG16_00013_RO_grande.jpg?v=1581618420" />
+                    <Button
+                      color="inherit"
+                      onClick={handleOpenUserMenu}
+                      sx={{ color: "black" }}
+                    >
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="https://www.spongebobshop.com/cdn/shop/products/Viacom_Spongebob_SubTotePRTGENSOG16_00013_RO_grande.jpg?v=1581618420"
+                      />
                     </Button>
                   </Stack>
                 </div>
@@ -250,15 +274,24 @@ export default function PersistentDrawerLeft({ children }) {
                   onClose={handleCloseUserMenu}
                 >
                   <MenuItem onClick={logout}>
-                    <Typography textAlign="center" sx={{ color: 'black' }}>Logout</Typography>
+                    <Typography textAlign="center" sx={{ color: "black" }}>
+                      Logout
+                    </Typography>
                   </MenuItem>
                 </Menu>
               </Box>
             ) : (
               <div style={{ display: "flex" }}>
                 <Stack direction="row" spacing={2}>
-                  <Button color="inherit" onClick={handleOpenLogin} sx={{ color: 'black' }}>
-                    <Avatar alt="Remy Sharp" src="https://www.spongebobshop.com/cdn/shop/products/Viacom_Spongebob_SubTotePRTGENSOG16_00013_RO_grande.jpg?v=1581618420" />
+                  <Button
+                    color="inherit"
+                    onClick={handleOpenLogin}
+                    sx={{ color: "black" }}
+                  >
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="https://www.spongebobshop.com/cdn/shop/products/Viacom_Spongebob_SubTotePRTGENSOG16_00013_RO_grande.jpg?v=1581618420"
+                    />
                   </Button>
                 </Stack>
               </div>
@@ -270,10 +303,10 @@ export default function PersistentDrawerLeft({ children }) {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          '& .MuiDrawer-paper': {
+          "& .MuiDrawer-paper": {
             width: drawerWidth,
-            boxSizing: 'border-box',
-            backgroundColor: 'gray', // Agregamos el color de fondo negro
+            boxSizing: "border-box",
+            backgroundColor: "gray", // Agregamos el color de fondo negro
           },
         }}
         variant="persistent"
@@ -282,81 +315,117 @@ export default function PersistentDrawerLeft({ children }) {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
           </IconButton>
         </DrawerHeader>
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <img src="https://media.canva.com/1/image-resize/1/200_200_100_PNG_F/czM6Ly9tZWRpYS1wcml2YXRlLmNhbnZhLmNvbS9yUHEwZy9NQUZ0UTNyUHEwZy8xL3AucG5n?osig=AAAAAAAAAAAAAAAAAAAAAN3jRs34MB2QurK-GULc9EPSyEGZ_mg4rQxo49-2NMQ5&exp=1696990483&x-canva-quality=thumbnail&csig=AAAAAAAAAAAAAAAAAAAAADREtkxyIsEO6Vy-Epy26UmB4vxoCDjUqcl4OdpFjCxg" alt="logo" style={{ width: '150px' }} />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src="src/assets/logo2.png"
+            alt="logo"
+            style={{ width: "150px" }}
+          />
         </Box>
         <Divider />
         <List>
-          <Link to="/" style={{ textDecoration: 'none' }}>
+          <Link to="/" style={{ textDecoration: "none" }}>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemIcon sx={{ color: 'white' }}>
+                <ListItemIcon sx={{ color: "white" }}>
                   <CottageIcon />
                 </ListItemIcon>
-                <ListItemText primary={'Home'} sx={{ color: 'white' }} />
+                <ListItemText primary={"Home"} sx={{ color: "white" }} />
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link to="/menu" style={{ textDecoration: 'none' }}>
+          {auth && (auth.role == 1 || auth.role == 2) && (
+            <>
+              <Link to="/users" style={{ textDecoration: "none" }}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon sx={{ color: "white" }}>
+                      <GroupIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={"Usuarios"}
+                      sx={{ color: "white" }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+              <Link to="/orders" style={{ textDecoration: "none" }}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon sx={{ color: "white" }}>
+                      <MenuBookIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Pedidos"} sx={{ color: "white" }} />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            </>
+          )}
+
+          <Link to="/notifications" style={{ textDecoration: "none" }}>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemIcon sx={{ color: 'white' }}>
-                  <MenuBookIcon />
-                </ListItemIcon>
-                <ListItemText primary={'Menu'} sx={{ color: 'white' }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link to="/notifications" style={{ textDecoration: 'none' }}>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{ color: 'white' }}>
+                <ListItemIcon sx={{ color: "white" }}>
                   <NotificationsActiveIcon />
                 </ListItemIcon>
-                <ListItemText primary={'Notificaciones'} sx={{ color: 'white' }} />
+                <ListItemText
+                  primary={"Notificaciones"}
+                  sx={{ color: "white" }}
+                />
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link to="/settings" style={{ textDecoration: 'none' }}>
+          <Link to="/settings" style={{ textDecoration: "none" }}>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemIcon sx={{ color: 'white' }}>
+                <ListItemIcon sx={{ color: "white" }}>
                   <SettingsIcon />
                 </ListItemIcon>
-                <ListItemText primary={'Configuración'} sx={{ color: 'white' }} />
+                <ListItemText
+                  primary={"Configuración"}
+                  sx={{ color: "white" }}
+                />
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link to="/logout" style={{ textDecoration: 'none' }}>
+          <ListItem disablePadding>
+            <ListItemButton onClick={logout}>
+              <ListItemIcon sx={{ color: "white" }}>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Salir"} sx={{ color: "white" }} />
+            </ListItemButton>
+          </ListItem>
+          <Link to="/history" style={{ textDecoration: "none" }}>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemIcon sx={{ color: 'white' }}>
-                  <LogoutIcon />
-                </ListItemIcon>
-                <ListItemText primary={'Salir'} sx={{ color: 'white' }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link to="/history" style={{ textDecoration: 'none' }}>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{ color: 'white' }}>
+                <ListItemIcon sx={{ color: "white" }}>
                   <HistoryIcon />
                 </ListItemIcon>
-                <ListItemText primary={'Historial'} sx={{ color: 'white' }} />
+                <ListItemText primary={"Historial"} sx={{ color: "white" }} />
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link to="/place" style={{ textDecoration: 'none' }}>
+          <Link to="/place" style={{ textDecoration: "none" }}>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemIcon sx={{ color: 'white' }}>
+                <ListItemIcon sx={{ color: "white" }}>
                   <PlaceIcon />
                 </ListItemIcon>
-                <ListItemText primary={'Lugar'} sx={{ color: 'white' }} />
+                <ListItemText primary={"Lugar"} sx={{ color: "white" }} />
               </ListItemButton>
             </ListItem>
           </Link>
@@ -364,9 +433,7 @@ export default function PersistentDrawerLeft({ children }) {
         <Divider />
       </Drawer>
       <Main open={open}>
-        <div style={{ marginTop: '25px' }}>
-          {children}
-        </div>
+        <div style={{ marginTop: "25px" }}>{children}</div>
       </Main>
       <LoginModal
         openLogin={openLogin}
@@ -379,8 +446,5 @@ export default function PersistentDrawerLeft({ children }) {
         handleCloseSignUp={handleCloseSignUp}
       />
     </Box>
-
   );
 }
-
-
