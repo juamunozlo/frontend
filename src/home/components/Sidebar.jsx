@@ -37,6 +37,7 @@ import LoginModal from '../../auth/LoginModal';
 import SignUpModal from "../../auth/SignUpModal";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import { useMediaQuery } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -92,6 +93,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function PersistentDrawerLeft({ children }) {
 
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
   const [openLogin, setOpenLogin] = useState(false);
   const handleOpenLogin = () => {
     setOpenLogin(true);
@@ -163,9 +165,9 @@ export default function PersistentDrawerLeft({ children }) {
           >
             <MenuIcon fontSize="large" color='black' />
           </IconButton>
-          <Link to="/" underline="none" style={{ textDecoration: 'none' }}>
-            <Typography variant="h4" noWrap component="div" className='title'>
-              The krusty krab
+          <Link to="/" underline="none" style={{ textDecoration: 'none' }} aria-label="Ir a la página de inicio">
+            <Typography variant="h4" noWrap component="div" className='title' role="heading">
+              {isSmallScreen ? 'The kk' : 'The krusty krab'}
             </Typography>
           </Link>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh', marginLeft: '25px' }}>
@@ -175,7 +177,7 @@ export default function PersistentDrawerLeft({ children }) {
               </Button>
             </Link>
           </Box>
-{/*           {auth && auth.role == 1 && (
+          {/*           {auth && auth.role == 1 && (
             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
               <Link to="/users">
                 <MenuItem onClick={handleCloseNavMenu}>
@@ -193,7 +195,7 @@ export default function PersistentDrawerLeft({ children }) {
             {!(auth && auth.role == 1) && (
               <Box>
                 <Tooltip title="Open Maps">
-                  <Link to="/maps">
+                  <Link to="/place">
                     <Badge color="error">
                       <IconButton style={{ color: "black" }}>
                         <PlaceIcon />
@@ -224,12 +226,12 @@ export default function PersistentDrawerLeft({ children }) {
             {auth ? (
               <Box sx={{ flexGrow: 0 }}>
                 <div style={{ display: "flex" }}>
-                <Stack direction="row" spacing={2}>
-                  <Button color="inherit" onClick={handleOpenUserMenu} sx={{ color: 'black' }}>
-                    <Avatar alt="Remy Sharp" src="https://www.spongebobshop.com/cdn/shop/products/Viacom_Spongebob_SubTotePRTGENSOG16_00013_RO_grande.jpg?v=1581618420" />
-                  </Button>
-                </Stack>
-              </div>
+                  <Stack direction="row" spacing={2}>
+                    <Button color="inherit" onClick={handleOpenUserMenu} sx={{ color: 'black' }}>
+                      <Avatar alt="Remy Sharp" src="https://www.spongebobshop.com/cdn/shop/products/Viacom_Spongebob_SubTotePRTGENSOG16_00013_RO_grande.jpg?v=1581618420" />
+                    </Button>
+                  </Stack>
+                </div>
 
                 <Menu
                   sx={{ mt: "45px" }}

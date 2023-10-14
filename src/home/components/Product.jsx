@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { addProduct } from "../../store/cart/thunks";
 import { useDispatch } from "react-redux";
+import { Link } from 'react-router-dom';
 
 export default function Product({ product, width, height }) {
   const dispatch = useDispatch();
@@ -46,6 +47,10 @@ export default function Product({ product, width, height }) {
       <CardActions>
         <Button size="small" onClick={() => dispatch(addProduct(product))}>
           Add to cart
+        </Button>
+        {/* <Button size="small" component={Link} to="/detalles" onClick={() => fetchProductDetails(product)}> */}
+        <Button size="small" component={Link} to="/details" onClick={() => console.log(product)}>
+          See details
         </Button>
       </CardActions>
     </Card>

@@ -23,7 +23,7 @@ export default function CartProduct({ product }) {
     <Card sx={{ backgroundColor: "#e4c8b1", borderRadius: "10%" }}>
       <CardMedia
         component="img"
-        alt="green iguana"
+        alt="cangreburguer"
         height="100"
         src={product.image.url}
       />

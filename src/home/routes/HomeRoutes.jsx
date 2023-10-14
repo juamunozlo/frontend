@@ -21,6 +21,8 @@ import Location from "../components/Location";
 import LocationImage from "../components/LocationImage";
 import Notifications from "../components/Notifications";
 import NotificationsImage from "../components/NotificationsImage";
+import Details from "../components/Details";
+
 //import Icommerce from "../components/Icommerce";
 
 function Copyright() {
@@ -92,27 +94,37 @@ export default function HomeRoutes() {
                 <Route path="/cart" element={<Cart />} />
                 <Route
                   path="/place"
-                  element= {
-                  <Grid container>
-                    <Grid item xs={24} sm={12} md={6}>
-                      <Location/>
-                    </Grid>
-                    <Grid item xs={24} sm={12} md={6}>
-                      <LocationImage/>
-                    </Grid>
-                  </Grid>}
+                  element={
+                    <Grid container>
+                      <Grid item xs={24} sm={12} md={6}>
+                        <Location />
+                      </Grid>
+                      <Grid item xs={24} sm={12} md={6}>
+                        <LocationImage />
+                      </Grid>
+                    </Grid>}
                 />
                 <Route
                   path="/notifications"
-                  element= {
-                  <Grid container>
-                    <Grid item xs={24} sm={12} md={6}>
-                      <Notifications/>
-                    </Grid>
-                    <Grid item xs={24} sm={12} md={6}>
-                      <NotificationsImage/>
-                    </Grid>
-                  </Grid>}
+                  element={
+                    <Grid container>
+                      <Grid item xs={24} sm={12} md={6}>
+                        <Notifications />
+                      </Grid>
+                      <Grid item xs={24} sm={12} md={6}>
+                        <NotificationsImage />
+                      </Grid>
+                    </Grid>}
+                />
+                <Route
+                  path="/details"
+                  element={<Details />}
+                  /* element={
+                    <Grid container>
+                      <Grid item xs={24} sm={12} md={6}>
+                        <Details />
+                      </Grid>
+                    </Grid>} */
                 />
               </Routes>
             </Grid>
