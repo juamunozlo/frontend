@@ -39,7 +39,7 @@ export default function Details() {
                                 <div style={{ display: 'flex', flexDirection: isSmallScreen ? 'column' : 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', pt: '16px' }}>
                                     <Typography fontWeight={"bold"} variant="h3" align="left" className="title" color="#ed716d" sx={{ pt: '16px' }}>$22.500</Typography>
                                     <div style={{ marginLeft: isSmallScreen ? '0' : '80px', pt: isSmallScreen ? '16px' : '0' }}>
-                                        <Typography fontWeight={"bold"} variant="h6" align="left" className="title" color="black" sx={{ pt: '16px' }}>$25.000</Typography>
+                                        <Typography fontWeight={"bold"} variant="h6" align="left" className="title" color="black" sx={{ pt: '16px' }}> Antes: $25.000</Typography>
                                         <Typography fontWeight={"bold"} variant="h6" align="left" className="title" color="#ed716d" sx={{ pt: '16px' }}>Disfruta  -10% de descuento</Typography>
                                     </div>
                                 </div>

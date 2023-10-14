@@ -10,24 +10,24 @@ import TableRow from "@mui/material/TableRow";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
-import { Avatar, Grid, IconButton, Tooltip } from "@mui/material";
+import { Avatar, Grid, IconButton, Tooltip, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { changeStatusProduct } from "../../store/products/thunks";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 
 const columns = [
-  { id: "order", label: "Order" },
-  { id: "name", label: "Name" },
-  { id: "price", label: "Price" },
+  { id: "order", label: "Order2", minWidth: 100 },
+  { id: "name", label: "Name", minWidth: 100 },
+  { id: "price", label: "Price", minWidth: 100 },
   {
     id: "description",
     label: "Description",
-    maxWidth: 200,
+    minWidth: 200,
   },
-  { id: "images", label: "Images" },
-  { id: "updated_at", label: "Updated At" },
-  { id: "actions", label: "Actions" },
+  { id: "images", label: "Images", minWidth: 100 },
+  { id: "updated_at", label: "Updated At", minWidth: 100 },
+  { id: "actions", label: "Actions", minWidth: 100 },
 ];
 
 export default function ProductTable() {
@@ -44,94 +44,91 @@ export default function ProductTable() {
   };
 
   const products = useSelector((state) => state.products);
-
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
   return (
     <>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{
-                      minWidth: column.minWidth,
-                      maxWidth: column.maxWidth,
-                    }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {products
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.name}
+      <Paper sx={{ width: "100%", overflow: "auto" }}>
+        <div style={{ width: "100%", overflowX: "auto" }}>
+          <TableContainer sx={{ minWidth: 700 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align="left"
+                      style={{
+                        minWidth: column.minWidth,
+                        maxWidth: column.maxWidth,
+                      }}
                     >
-                      {columns.map((column) => {
-                        if (column.id === "actions") {
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              <Tooltip title="Edit">
-                                <Link to={`/products/edit/${row.id}`}>
-                                  <IconButton color="primary">
-                                    <EditRoundedIcon />
-                                  </IconButton>
-                                </Link>
-                              </Tooltip>
-                              {row.deleted_at ? (
-                                <Tooltip title="Restore">
-                                  <IconButton
-                                    color="primary"
-                                    onClick={() => changeStatusProduct(row)}
-                                  >
-                                    <CheckCircleOutlineRoundedIcon />
-                                  </IconButton>
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {products
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
+                        {columns.map((column) => {
+                          if (column.id === "actions") {
+                            return (
+                              <TableCell key={column.id} align="left">
+                                <Tooltip title="Edit">
+                                  <Link to={`/products/edit/${row.id}`}>
+                                    <IconButton color="primary">
+                                      <EditRoundedIcon />
+                                    </IconButton>
+                                  </Link>
                                 </Tooltip>
-                              ) : (
-                                <Tooltip title="Delete">
-                                  <IconButton
-                                    color="primary"
-                                    onClick={() => changeStatusProduct(row)}
-                                  >
-                                    <HighlightOffRoundedIcon />
-                                  </IconButton>
-                                </Tooltip>
-                              )}
-                            </TableCell>
-                          );
-                        } else if (column.id === "images") {
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              <Avatar alt={row.name} src={row.image.url} />
-                            </TableCell>
-                          );
-                        } else {
-                          const value = row[column.id];
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          );
-                        }
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                                {row.deleted_at ? (
+                                  <Tooltip title="Restore">
+                                    <IconButton
+                                      color="primary"
+                                      onClick={() => changeStatusProduct(row)}
+                                    >
+                                      <CheckCircleOutlineRoundedIcon />
+                                    </IconButton>
+                                  </Tooltip>
+                                ) : (
+                                  <Tooltip title="Delete">
+                                    <IconButton
+                                      color="primary"
+                                      onClick={() => changeStatusProduct(row)}
+                                    >
+                                      <HighlightOffRoundedIcon />
+                                    </IconButton>
+                                  </Tooltip>
+                                )}
+                              </TableCell>
+                            );
+                          } else if (column.id === "images") {
+                            return (
+                              <TableCell key={column.id} align="left">
+                                <Avatar alt={row.name} src={row.image.url} />
+                              </TableCell>
+                            );
+                          } else {
+                            const value = row[column.id];
+                            return (
+                              <TableCell key={column.id} align="left">
+                                {column.format && typeof value === "number"
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          }
+                        })}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
@@ -145,3 +142,4 @@ export default function ProductTable() {
     </>
   );
 }
+

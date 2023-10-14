@@ -131,7 +131,7 @@ export default function HomeRoutes() {
           </Container>
         </main>
         {/* Footer */}
-        <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
+        {/* <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
           <Typography variant="h6" align="center" gutterBottom>
             Gracias por visitar nuestra tienda.
           </Typography>
@@ -144,7 +144,7 @@ export default function HomeRoutes() {
             Something here to give the footer a purpose!
           </Typography>
           <Copyright />
-        </Box>
+        </Box> */}
         {/* End footer */}
       </ThemeProvider>
 
