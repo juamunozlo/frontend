@@ -1,4 +1,3 @@
-import * as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,11 +9,19 @@ import TableRow from "@mui/material/TableRow";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
-import { Avatar, Grid, IconButton, Tooltip, useMediaQuery } from "@mui/material";
+import {
+  Avatar,
+  Grid,
+  IconButton,
+  Tooltip,
+  useMediaQuery,
+} from "@mui/material";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { changeStatusProduct } from "../../store/products/thunks";
+import { useDispatch, useSelector } from "react-redux";
+import { changeStatusProduct, getProduct } from "../../store/products/thunks";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
+import React, { useEffect } from "react";
+import axios from "axios";
 
 const columns = [
   { id: "order", label: "Order2", minWidth: 100 },
@@ -38,13 +45,39 @@ export default function ProductTable() {
     setPage(newPage);
   };
 
+  const dispatch = useDispatch();
+
+  const changeStatus = (idProduct) => {
+    let isChange = window.confirm(
+      "Are you sure you want to change the status?"
+    );
+    if (isChange) {
+      axios
+        .delete(`/api/products/${idProduct}`)
+        .then((res) => {
+          dispatch(changeStatusProduct(idProduct));
+          console.log(res);
+          alert(res.data.message);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err);
+        });
+    } else {
+      return;
+    }
+  };
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  useEffect(() => {
+    dispatch(getProduct());
+  }, []);
 
   const products = useSelector((state) => state.products);
-  const isSmallScreen = useMediaQuery('(max-width:600px)');
+  const isSmallScreen = useMediaQuery("(max-width:600px)");
   return (
     <>
       <Paper sx={{ width: "100%", overflow: "auto" }}>
@@ -72,7 +105,12 @@ export default function ProductTable() {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.name}
+                      >
                         {columns.map((column) => {
                           if (column.id === "actions") {
                             return (
@@ -88,7 +126,7 @@ export default function ProductTable() {
                                   <Tooltip title="Restore">
                                     <IconButton
                                       color="primary"
-                                      onClick={() => changeStatusProduct(row)}
+                                      onClick={() => changeStatus(row.id)}
                                     >
                                       <CheckCircleOutlineRoundedIcon />
                                     </IconButton>
@@ -97,7 +135,7 @@ export default function ProductTable() {
                                   <Tooltip title="Delete">
                                     <IconButton
                                       color="primary"
-                                      onClick={() => changeStatusProduct(row)}
+                                      onClick={() => changeStatus(row.id)}
                                     >
                                       <HighlightOffRoundedIcon />
                                     </IconButton>
@@ -142,4 +180,3 @@ export default function ProductTable() {
     </>
   );
 }
-

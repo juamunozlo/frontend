@@ -12,6 +12,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
+import { getUserApi, signIn } from "../store/auth/thunks";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 //import axios from "axios";
 
 function Copyright(props) {
@@ -39,16 +43,18 @@ export default function Login({
   handleOpenSignUp,
   handleOpenForgetPassword,
 }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post("/login", form)
-      .then((res) => {
-        getUser();
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+
+    dispatch(signIn(form));
+    dispatch(getUserApi());
+    if (auth) {
+      navigate("/");
+    }
   };
 
   const [form, setForm] = useState({

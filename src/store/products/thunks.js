@@ -1,67 +1,69 @@
-/*import axios from "axios";
-import { show } from "../message/messageSlice";*/
-import { get, store, update, remove } from "./productsSlice";
+import axios from "axios";
+import {
+  get,
+  store,
+  update,
+  changeStatus,
+  getActiveProducts,
+} from "./productsSlice";
 
-export const storeProduct = (question) => {
+export const storeProduct = (product) => {
   return async (dispatch) => {
-    /*await axios
-      .post("/questions/create", question)
+    axios
+      .post("/api/products", product)
       .then((res) => {
-        if (res.status === 200) {
-          dispatch(store(question.name));
-          dispatch(show(res.data.message));
-        } else {
-          dispatch(show("Operación erronea."));
-        }
+        dispatch(store(res.data.data));
+        alert(res.data.message);
       })
       .catch((err) => {
         console.log(err);
-        dispatch(show("Operación erronea."));
-      });*/
+      });
   };
 };
-export const updateProduct = (question) => {
+export const updateProduct = (product) => {
   return async (dispatch) => {
-    /*await axios
-      .put(`/questions/updateQuestion/${question.id}`, question)
+    axios
+      .put(`/api/products/${product.get("id")}`, product)
       .then((res) => {
-        if (res.status === 200) {
-          dispatch(update(question));
-          dispatch(show(res.data.message));
-        } else {
-          dispatch(show("Operación erronea."));
-        }
+        dispatch(update(res.data.data));
+        alert(res.data.message);
       })
       .catch((err) => {
         console.log(err);
-        dispatch(show("Operación erronea."));
-      });*/
+        alert(err);
+      });
   };
 };
 
 export const getProduct = () => {
   return async (dispatch) => {
-    /*await axios
-      .get("/questions/getQuestions")
+    axios
+      .get("/api/products")
       .then((res) => {
-        dispatch(get(res.data.questions));
+        dispatch(get(res.data.data));
       })
       .catch((err) => {
         console.log(err);
-      });*/
+      });
   };
 };
 
-export const changeStatusProduct = () => {
+export const getProductActive = () => {
   return async (dispatch) => {
-    /*await axios
-          .get("/questions/getQuestions")
-          .then((res) => {
-            dispatch(get(res.data.questions));
-          })
-          .catch((err) => {
-            console.log(err);
-          });*/
+    axios
+      .get("/api/products")
+      .then((res) => {
+        dispatch(getActiveProducts(res.data.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const changeStatusProduct = (idProduct) => {
+  return async (dispatch) => {
+    dispatch(changeStatus(idProduct));
   };
 };
 

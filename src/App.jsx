@@ -3,23 +3,22 @@ import { HashRouter } from "react-router-dom";
 import LoginModal from "./auth/LoginModal";
 import SignUpModal from "./auth/SignUpModal";
 import Store from "./home/Store";
+import { useDispatch } from "react-redux";
+import { getCookie, getUserApi } from "./store/auth/thunks";
+import axios from "axios";
 
 function App() {
+  axios.defaults.withCredentials = true;
+  axios.defaults.baseURL = "http://localhost:8000";
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    /*axios.get("/sanctum/csrf-cookie").then(() => {
-      getUser();
-    });*/
+    console.log("App");
+    dispatch(getCookie());
   }, []);
 
   const getUser = () => {
-    /*axios
-      .get("/api/user")
-      .then((res) => {
-        dispatch({ type: TYPES.GET_USER, payload: res.data });
-      })
-      .catch((err) => {
-        dispatch({ type: TYPES.GET_USER, payload: null });
-      });*/
+    dispatch(getUserApi());
   };
 
   const [openLogin, setOpenLogin] = useState(false);

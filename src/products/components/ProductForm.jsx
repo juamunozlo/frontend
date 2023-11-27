@@ -12,14 +12,14 @@ import {
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { storeProduct, updateProduct } from "../../store/products/thunks";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 const Input = styled("input")({
   display: "none",
 });
 export default function ProductForm({ edit }) {
   const products = useSelector((state) => state.products);
-
+  const dispatch = useDispatch();
   let initialForm = {
     name: "",
     price: "",
@@ -68,9 +68,9 @@ export default function ProductForm({ edit }) {
     formData.append("image", form.image);
 
     if (edit) {
-      updateProduct(formData);
+      dispatch(updateProduct(formData));
     } else {
-      storeProduct(formData);
+      dispatch(storeProduct(formData));
     }
   };
   return (

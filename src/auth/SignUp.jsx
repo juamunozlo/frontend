@@ -12,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { signUp } from "../store/auth/thunks";
 //import axios from "axios";
 
 function Copyright(props) {
@@ -35,9 +37,13 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp({ getUser, handleOpenLogin }) {
+  const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
+
+    dispatch(signUp(form));
+    /*axios
       .post("/register", form)
       .then((res) => {
         getUser();
@@ -45,7 +51,7 @@ export default function SignUp({ getUser, handleOpenLogin }) {
       .catch((err) => {
         console.log(err);
         alert(err.message);
-      });
+      });*/
   };
 
   const [form, setForm] = useState({

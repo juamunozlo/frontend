@@ -8,7 +8,7 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from "@mui/material/styles";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Cart from "../components/Cart";
@@ -24,6 +24,9 @@ import NotificationsImage from "../components/NotificationsImage";
 import Details from "../components/Details";
 import UserRoutes from "../../users/routes/UserRoutes";
 import OrderRoutes from "../../orders/routes/OrderRoutes";
+import axios from "axios";
+import { getCookie, getUserApi } from "../../store/auth/thunks";
+import { getProduct } from "../../store/products/thunks";
 
 //import Icommerce from "../components/Icommerce";
 
@@ -42,22 +45,28 @@ theme = responsiveFontSizes(theme);
 
 export default function HomeRoutes() {
   const auth = useSelector((state) => state.auth);
+  axios.defaults.withCredentials = true;
+  axios.defaults.baseURL = "http://localhost:8000";
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    /*axios.get("/sanctum/csrf-cookie").then(() => {
+    axios.get("/sanctum/csrf-cookie").then(() => {
       getUser();
-    });*/
+    });
+    //dispatch(getProduct());
   }, []);
 
   const getUser = () => {
-    /*axios
+    //dispatch(getUserApi());
+    axios
       .get("/api/user")
       .then((res) => {
-        dispatch({ type: TYPES.GET_USER, payload: res.data });
+        console.log("res.data: " + res.data);
+        dispatch(getUserApi(res.data));
       })
       .catch((err) => {
-        dispatch({ type: TYPES.GET_USER, payload: null });
-      });*/
+        //dispatch(getUserApi({}));
+      });
   };
 
   const [openLogin, setOpenLogin] = useState(false);
@@ -90,7 +99,7 @@ export default function HomeRoutes() {
               <Routes>
                 <Route
                   path="/"
-                  element={(!auth || auth.role === 3) && <Products />}
+                  element={(auth == null || auth.role === 3) && <Products />}
                 />
                 <Route path="/products/*" element={<ProductRoutes />} />
                 <Route path="/users/*" element={<UserRoutes />} />
