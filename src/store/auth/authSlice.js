@@ -22,7 +22,12 @@ export const authSlice = createSlice({
       state.role = ""; //"estudiante", // "administrador"
       state.message = "";
       state.token = "";*/
-      return null;
+      return {
+        id: 0,
+        name: "",
+        role: 3,
+        email: "",
+      };
     },
   },
 });

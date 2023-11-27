@@ -9,7 +9,7 @@ export const productsSlice = createSlice({
     },
     getActiveProducts: (state, { payload }) => {
       //Obtener los productos activos
-      return payload.filter((product) => product.deleted_at != null);
+      return payload.filter((product) => product.deleted_at == null);
     },
     store: (state, { payload }) => {
       return [payload, ...state];

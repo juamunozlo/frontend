@@ -27,7 +27,7 @@ import UserRoutes from "../../users/routes/UserRoutes";
 import OrderRoutes from "../../orders/routes/OrderRoutes";
 import axios from "axios";
 import { getCookie, getUserApi } from "../../store/auth/thunks";
-import { getProduct } from "../../store/products/thunks";
+import { getProduct, getProductActive } from "../../store/products/thunks";
 
 //import Icommerce from "../components/Icommerce";
 
@@ -54,6 +54,11 @@ export default function HomeRoutes() {
     axios.get("/sanctum/csrf-cookie").then(() => {
       getUser();
     });
+    if (auth.role == 3) {
+      dispatch(getProductActive());
+    } else {
+      dispatch(getProduct());
+    }
     //dispatch(getProduct());
   }, []);
 
@@ -100,9 +105,7 @@ export default function HomeRoutes() {
               <Routes>
                 <Route
                   path="/"
-                  element={
-                    ((!auth || auth.role === 3) && <Products />) || <Empty />
-                  }
+                  element={auth.role === 3 ? <Products /> : <Empty />}
                 />
                 <Route path="/products/*" element={<ProductRoutes />} />
                 <Route path="/users/*" element={<UserRoutes />} />
