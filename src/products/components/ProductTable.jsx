@@ -24,7 +24,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 
 const columns = [
-  { id: "order", label: "Order2", minWidth: 100 },
+  { id: "order", label: "Order", minWidth: 100 },
   { id: "name", label: "Name", minWidth: 100 },
   { id: "price", label: "Price", minWidth: 100 },
   {
@@ -32,7 +32,7 @@ const columns = [
     label: "Description",
     minWidth: 200,
   },
-  { id: "images", label: "Images", minWidth: 100 },
+  { id: "images", label: "Images", minWidth: 100},
   { id: "updated_at", label: "Updated At", minWidth: 100 },
   { id: "actions", label: "Actions", minWidth: 100 },
 ];

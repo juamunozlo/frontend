@@ -20,6 +20,7 @@ import Products from "../components/Products";
 import Location from "../components/Location";
 import LocationImage from "../components/LocationImage";
 import Notifications from "../components/Notifications";
+import Empty from "../components/Empty";
 import NotificationsImage from "../components/NotificationsImage";
 import Details from "../components/Details";
 import UserRoutes from "../../users/routes/UserRoutes";
@@ -99,7 +100,9 @@ export default function HomeRoutes() {
               <Routes>
                 <Route
                   path="/"
-                  element={(auth == null || auth.role === 3) && <Products />}
+                  element={
+                    ((!auth || auth.role === 3) && <Products />) || <Empty />
+                  }
                 />
                 <Route path="/products/*" element={<ProductRoutes />} />
                 <Route path="/users/*" element={<UserRoutes />} />
@@ -131,6 +134,8 @@ export default function HomeRoutes() {
                     </Grid>
                   }
                 />
+                <Route path="/settings" element={<Empty />} />
+                <Route path="/history" element={<Empty />} />
                 <Route
                   path="/details"
                   element={<Details />}
