@@ -209,7 +209,7 @@ export default function PersistentDrawerLeft({ children }) {
           <Box
             sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
           >
-            {!(auth && auth.role == 1) && (
+            {!(auth.id != 0 && auth.role == 1) && (
               <Box>
                 <Tooltip title="Open Maps">
                   <Link to="/place">
@@ -240,7 +240,7 @@ export default function PersistentDrawerLeft({ children }) {
                 </Tooltip>
               </Box>
             )}
-            {auth ? (
+            {auth.id != 0 ? (
               <Box sx={{ flexGrow: 0 }}>
                 <div style={{ display: "flex" }}>
                   <Stack direction="row" spacing={2}>
@@ -347,7 +347,7 @@ export default function PersistentDrawerLeft({ children }) {
               </ListItemButton>
             </ListItem>
           </Link>
-          {auth && (auth.role == 1 || auth.role == 2) && (
+          {auth.id != 0 && (auth.role == 1 || auth.role == 2) && (
             <>
               <Link to="/users" style={{ textDecoration: "none" }}>
                 <ListItem disablePadding>

@@ -23,7 +23,9 @@ export const storeProduct = (product) => {
 export const updateProduct = (product) => {
   return async (dispatch) => {
     axios
-      .put(`/api/products/${product.get("id")}`, product)
+      .post(`/api/products/${product.get("id")}`, product, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then((res) => {
         dispatch(update(res.data.data));
         alert(res.data.message);

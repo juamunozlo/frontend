@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { addProduct } from "../../store/cart/thunks";
 import { useDispatch } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function Product({ product, width, height }) {
   const dispatch = useDispatch();
@@ -16,6 +16,14 @@ export default function Product({ product, width, height }) {
     currency: "COP",
     minimumFractionDigits: 0,
   });
+
+  let description = "";
+  if (product.description.length > 60 && product.order != 1) {
+    description = product.description.substring(0, 60) + "...";
+  } else {
+    description = product.description;
+  }
+
   return (
     <Card
       sx={{
@@ -30,17 +38,22 @@ export default function Product({ product, width, height }) {
         alt={product.description}
         //height="140"
         //sx={{width:"50%"}}
-        style={{ height: "52%", width:"100%"}}
+        style={{ height: "52%", width: "100%" }}
         image={
           product.image ? product.image.url : "https://picsum.photos/200/300"
         }
       />
       <CardContent>
-        <Typography fontFamily={'SpongeBob Font Condensed'} gutterBottom variant="h5" component="div">
+        <Typography
+          fontFamily={"SpongeBob Font Condensed"}
+          gutterBottom
+          variant="h5"
+          component="div"
+        >
           {product.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {product.description}
+          {description}
         </Typography>
         <strong>{formatterPeso.format(product.price)}</strong>
       </CardContent>
@@ -49,7 +62,12 @@ export default function Product({ product, width, height }) {
           Add to cart
         </Button>
         {/* <Button size="small" component={Link} to="/detalles" onClick={() => fetchProductDetails(product)}> */}
-        <Button size="small" component={Link} to="/details" onClick={() => console.log(product)}>
+        <Button
+          size="small"
+          component={Link}
+          to={`/details/${product.id}`}
+          onClick={() => console.log(product)}
+        >
           See details
         </Button>
       </CardActions>

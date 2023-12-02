@@ -9,7 +9,7 @@ export default function OrderRoutes() {
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
-    if (auth === null || auth.role === 3) {
+    if (auth.id == 0 || auth.role === 3) {
       console.log("auth: " + auth);
       navigate("/");
     }

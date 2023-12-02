@@ -52,7 +52,7 @@ export default function Login({
 
     dispatch(signIn(form));
     dispatch(getUserApi());
-    if (auth) {
+    if (auth.id != 0) {
       navigate("/");
     }
   };

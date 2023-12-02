@@ -10,7 +10,7 @@ export default function ProductRoutes() {
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
-    if (auth === null || auth.role === 3) {
+    if (auth.id === 0 || auth.role === 3) {
       console.log("auth: " + auth);
       navigate("/");
     }
@@ -25,7 +25,7 @@ export default function ProductRoutes() {
           <Tooltip title="Create a product">
             <Link to="/products/create">
               <IconButton color="primary" aria-label="Create a product">
-                <AddCircleOutlineRoundedIcon style={{ fontSize: 60 }}/>
+                <AddCircleOutlineRoundedIcon style={{ fontSize: 60 }} />
               </IconButton>
             </Link>
           </Tooltip>

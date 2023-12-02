@@ -11,14 +11,14 @@ export const signIn = (form) => {
       .post("/login", form)
       .then((res) => {
         //getUserApi();
-        /*axios
+        axios
           .get("/api/user")
           .then((res1) => {
             dispatch(login(res1.data));
           })
           .catch((err) => {
             dispatch(logout());
-          });*/
+          });
       })
       .catch((err) => {
         alert(err.message);

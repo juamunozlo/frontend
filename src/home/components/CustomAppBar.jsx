@@ -73,7 +73,7 @@ const CustomAppBar = ({ handleOpenLogin, handleOpenSignUp }) => {
           >
             Crustáceo Cascarudo
           </Typography>
-          {auth && auth.role == 1 && (
+          {auth.id != 0 && auth.role == 1 && (
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -132,7 +132,7 @@ const CustomAppBar = ({ handleOpenLogin, handleOpenSignUp }) => {
           >
             Crustáceo Cascarudo
           </Typography>
-          {auth && auth.role == 1 && (
+          {auth.id != 0 && auth.role == 1 && (
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Link to={page.path} key={page.name}>
@@ -146,7 +146,7 @@ const CustomAppBar = ({ handleOpenLogin, handleOpenSignUp }) => {
               ))}
             </Box>
           )}
-          {!(auth && auth.role == 1) && (
+          {!(auth.id != 0 && auth.role == 1) && (
             <Tooltip title="Open cart">
               <Link to="/cart">
                 <Badge badgeContent={cart.length} color="error">
@@ -157,7 +157,7 @@ const CustomAppBar = ({ handleOpenLogin, handleOpenSignUp }) => {
               </Link>
             </Tooltip>
           )}
-          {auth ? (
+          {auth.id != 0 ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton

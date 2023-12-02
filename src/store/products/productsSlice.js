@@ -22,9 +22,13 @@ export const productsSlice = createSlice({
     changeStatus: (state, { payload }) => {
       //Cambiar estado
       console.log("payload: " + payload);
-      return state.map((product) => {
-        product.id;
-      });
+      return state.map((product) =>
+        product.id === payload
+          ? product.deleted_at
+            ? { ...product, deleted_at: null }
+            : { ...product, deleted_at: "deleted" }
+          : product
+      );
     },
   },
 });

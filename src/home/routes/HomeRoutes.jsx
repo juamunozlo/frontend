@@ -140,7 +140,7 @@ export default function HomeRoutes() {
                 <Route path="/settings" element={<Empty />} />
                 <Route path="/history" element={<Empty />} />
                 <Route
-                  path="/details"
+                  path="/details/:id"
                   element={<Details />}
                   /* element={
                     <Grid container>

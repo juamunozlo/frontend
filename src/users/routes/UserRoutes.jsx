@@ -10,7 +10,7 @@ export default function UserRoutes() {
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
-    if (auth === null || auth.role === 3) {
+    if (auth.id === null || auth.role === 3) {
       console.log("auth: " + auth);
       navigate("/");
     }

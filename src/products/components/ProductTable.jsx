@@ -32,7 +32,7 @@ const columns = [
     label: "Description",
     minWidth: 200,
   },
-  { id: "images", label: "Images", minWidth: 100},
+  { id: "images", label: "Images", minWidth: 100 },
   { id: "updated_at", label: "Updated At", minWidth: 100 },
   { id: "actions", label: "Actions", minWidth: 100 },
 ];
@@ -109,7 +109,7 @@ export default function ProductTable() {
                         hover
                         role="checkbox"
                         tabIndex={-1}
-                        key={row.name}
+                        key={row.id}
                       >
                         {columns.map((column) => {
                           if (column.id === "actions") {
@@ -146,7 +146,7 @@ export default function ProductTable() {
                           } else if (column.id === "images") {
                             return (
                               <TableCell key={column.id} align="left">
-                                <Avatar alt={row.name} src={row.image.url} />
+                                <Avatar alt={row.name} src={row.image?.url} />
                               </TableCell>
                             );
                           } else {
